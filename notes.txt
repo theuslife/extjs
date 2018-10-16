@@ -19,8 +19,23 @@ Ext.define('Usuario', {
     }
 });
 
+============================Herança===================================
 //instaciando a classe, formando assim um objeto
 let usuario = Ext.create('Usuario');
 usuario.nome = "Matheus";
 usuario.senha = "123";
 console.log(usuario);
+
+
+Ext.define('MyButton', {
+    //Herança (Aqui herdamos o componente nativo do ext js)
+    extend: 'Ext.button.Button',
+});
+
+
+Ext.onReady(() => {
+    let user = Ext.create('MyButton', {
+        text: 'Meu Botao',
+        renderTo: Ext.getBody()
+    });
+});
