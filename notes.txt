@@ -1,0 +1,26 @@
+===========================Alert====================================
+<script type="text/javascript">
+    Ext.onReady(function(){
+        Ext.MessageBox.alert('Bem vindo', 'Olá, mundo');
+    });
+</script>
+===========================Definindo classes====================================
+//Definindo uma classe no Ext
+Ext.define('Usuario', {
+    nome: '',
+    senha: '',
+
+    login: () => {
+        console.log('Fazendo login...');
+    },
+    logout: () => 
+    {
+        console.log('Fazendo Logout...');
+    }
+});
+
+//instaciando a classe, formando assim um objeto
+let usuario = Ext.create('Usuario');
+usuario.nome = "Matheus";
+usuario.senha = "123";
+console.log(usuario);
