@@ -113,7 +113,86 @@ Example 1:
     })
 ============================Apelidos===================================
 //Example 1
+    Ext.define('Aula07.component.MyButton', {
+        //Sim, o alias precisa ser todo em minúsculo
+        alias: 'widget.mybutton',
+        extend: 'Ext.button.Button',
+        renderTo: Ext.getBody(),
+        initComponent: function() 
+        {
+            this.text = 'Eu sou um botão clickável';
+            this.callParent();
+        }
+    })
 
-    
+    Ext.onReady(()=>{
+        // let button = Ext.create('MyButton');
+        let button = Ext.widget('mybutton');
+    })
+============================Config (Encapsulamento)=================================
+//Example 1:
+
+    Ext.define('Usuario', {
+        //Quando declaramos atributos dentro do config recebemos 
+        //4 métodos automáticos para serem utilizados
+        config: {
+            nome: '',
+            senha: '',
+        },
+    });
+
+    Ext.onReady(()=>{
+        let usuario = Ext.create('Usuario');
+        usuario.setNome('Matheus Rodrigues'); 
+        usuario.setSenha('Teste@123');
+        console.log(usuario);
+    })
+============================Atributos e Métodos estáticos=================================
+//Examplo 1:
+    Ext.define('Calculadora', {
+        //Dentro de statics estamos instanciando nossos atributos e métodos
+        statics: 
+        {
+            numero: 0,
+            soma: (n1, n2) => 
+            {
+                return n1 + n2;
+            }
+
+        },
+        constructor: function() 
+        {
+            //Acessando o atributo estático e acrescentando mais um número após ele ser instanciado
+            this.statics().numero++;
+        }
+    });
+
+    Ext.onReady(()=>{
+        //Podemos fazer a chamada dos atributos/métodos estáticos desta maneira no console
+        console.log(Calculadora.numero);
+        let calc = Ext.create('Calculadora');
+        console.log(Calculadora.numero);
+
+        //Ou seja, você consegue acessar todos os métodos estáticos sem problemas
+        console.log(Calculadora.soma(5,5));
+    })
+
+============================Singleton=================================
+Ext.define('Constante', {
+    //Singleton não permite instâncias, podemos então acessar métodos e atributos sem instanciar
+    singleton: true,
+
+    NAME: 'Matheus',
+    AGE: 19
+})
+
+Ext.onReady(()=>{
+    console.log(Constante.NAME);
+})
+
+ 
+
+
+
 
 
