@@ -1,0 +1,119 @@
+===========================Alert====================================
+//Example 1
+    <script type="text/javascript">
+        Ext.onReady(function(){
+            Ext.MessageBox.alert('Bem vindo', 'Olá, mundo');
+        });
+    </script>
+===========================Definindo classes====================================
+//Example 1
+    //Definindo uma classe no Ext
+    Ext.define('Usuario', {
+        nome: '',
+        senha: '',
+
+        login: () => {
+            console.log('Fazendo login...');
+        },
+        logout: () => 
+        {
+            console.log('Fazendo Logout...');
+        }
+    });
+
+============================Herança===================================
+
+//Example 1
+    //instaciando a classe, formando assim um objeto
+    let usuario = Ext.create('Usuario');
+    usuario.nome = "Matheus";
+    usuario.senha = "123";
+    console.log(usuario);
+
+    Ext.define('MyButton', {
+        //Herança (Aqui herdamos o componente nativo do ext js)
+        extend: 'Ext.button.Button',
+    });
+
+    Ext.onReady(() => {
+        let user = Ext.create('MyButton', {
+            text: 'Meu Botao',
+            renderTo: Ext.getBody()
+        });
+    });
+
+//Example 2
+    Ext.define('MyButton', {
+        extend: 'Ext.button.Button',
+        renderTo: Ext.getBody(),
+
+        //Classe mãe de todos os componentes
+        initComponent: function() 
+        {
+            //Configurações que desejamos que não sejam sobreescritas
+            this.text = 'My button';
+            this.callParent();
+        }
+
+    });
+
+    Ext.onReady(() => {
+        let user = Ext.create('MyButton', {
+            renderTo: 'app'
+        });
+    });
+
+============================Mixins===================================
+Example 1:
+    //Mixins permite hedarmos particularidades de outras classes como os métodos
+
+    //Mixin tocar
+    Ext.define('aula07.mixins.Tocar', {
+        //Alias é um apelido
+        alias: 'widget.tocar',
+        tocar: () => 
+        {
+            console.log('Tocando instrumento');
+        }
+    })
+
+    //Mixin afinar
+    Ext.define('aula07.mixins.Afinar', {
+        alias: 'widget.afinar',
+        afinar: () => 
+        {
+            console.log('Afinando instrumento');
+        }
+    })
+
+    //Instrumento violão que usará do mixins acima
+    Ext.define('aula07.instrumento.Violao', {
+        alias: 'widget.violao',
+        mixins: 
+        {
+            tocarInstrumento: 'aula07.mixins.Tocar',
+            afinarInstrumento: 'aula07.mixins.Afinar'
+        }
+    })
+
+    //Instrumento piano que usará os mixins também
+    Ext.define('aula07.instrumento.Piano', {
+        alias: 'widget.piano',
+        mixins: 
+        {
+            tocarInstrumento: 'aula07.mixins.Tocar',
+        }
+    })
+
+    Ext.onReady(()=>{
+        let violao = Ext.widget('violao');
+        let piano = Ext.widget('piano');
+        violao.afinar();
+        piano.tocar();
+    })
+============================Apelidos===================================
+//Example 1
+
+    
+
+
